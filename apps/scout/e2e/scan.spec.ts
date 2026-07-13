@@ -39,7 +39,11 @@ test("clicking a scan row opens the scan detail panel", async ({
           spec: {
             scan_id: SCAN_ID,
             scan_name: "eval-safety",
-            options: { max_transcripts: 25 },
+            options: {
+              max_transcripts: 25,
+              store_input: true,
+              store_scan_events: true,
+            },
             packages: {},
             scanners: {},
             timestamp: "2024-01-15T10:30:00Z",

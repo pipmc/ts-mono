@@ -22,7 +22,11 @@ const mockStatus: Status = {
   spec: {
     scan_id: "test-scan-id",
     scan_name: "test-scan",
-    options: { max_transcripts: 25 },
+    options: {
+      max_transcripts: 25,
+      store_input: true,
+      store_scan_events: true,
+    },
     packages: {},
     scanners: {},
     timestamp: "2024-01-01T00:00:00Z",

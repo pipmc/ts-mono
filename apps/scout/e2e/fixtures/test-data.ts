@@ -94,7 +94,11 @@ export function createStatus(overrides?: Partial<Status>): Status {
     spec: {
       scan_id: "aBcDeFgHiJkLmNoPqRsTuV",
       scan_name: "eval-safety",
-      options: { max_transcripts: 25 },
+      options: {
+        max_transcripts: 25,
+        store_input: true,
+        store_scan_events: true,
+      },
       packages: {},
       scanners: {},
       timestamp: "2024-01-01T00:00:00Z",
