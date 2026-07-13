@@ -1,6 +1,5 @@
 import { decompress as decompressZstd } from "fzstd";
 
-import type { Event } from "@tsmono/inspect-common/types";
 import { expandEvents } from "@tsmono/inspect-common/utils";
 import { ApiError, asyncJsonParse, encodeBase64Url } from "@tsmono/util";
 
@@ -16,7 +15,6 @@ import {
   RawEncoding,
   Result,
   ScanJobConfig,
-  ScannerInputResponse,
   ScannersResponse,
   ScansResponse,
   SearchInputListResponse,
@@ -39,8 +37,8 @@ import {
   TopicVersions,
 } from "./api";
 import { resolveAttachments } from "./attachmentsHelpers";
-import { expandInputEvents } from "./expandInputEvents";
 import { serverRequestApi } from "./request";
+import { ScanResultPayload, toScanResultDetail } from "./scanResultDetail";
 
 export type HeaderProvider = () => Promise<Record<string, string>>;
 
@@ -267,21 +265,8 @@ export const apiScoutServer = (
         "GET",
         `/scans/${encodeBase64Url(scansDir)}/${encodeBase64Url(scanPath)}/${encodeURIComponent(scanner)}/${encodeURIComponent(uuid)}?column=input&column=input_type&column=input_data&column=scan_events`
       );
-      const parsed = await asyncJsonParse<
-        ScannerInputResponse & { scan_events: Event[] }
-      >(raw);
-
-      return {
-        input: {
-          input_type: parsed.input_type,
-          input: expandInputEvents(
-            parsed.input,
-            parsed.input_type,
-            parsed.input_data
-          ),
-        },
-        scanEvents: parsed.scan_events ?? [],
-      };
+      const parsed = await asyncJsonParse<ScanResultPayload>(raw);
+      return toScanResultDetail(parsed);
     },
     getActiveScans: async (): Promise<ActiveScansResponse> =>
       asyncJsonParse<ActiveScansResponse>(

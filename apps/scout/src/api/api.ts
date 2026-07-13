@@ -31,7 +31,7 @@ export type ClientStorage = StateStorage;
 export type ScalarValue = string | number | boolean | null;
 
 export interface ScanResultDetail {
-  input: ScannerInput;
+  input?: ScannerInput;
   scanEvents: Event[];
 }
 
