@@ -799,6 +799,10 @@ export interface components {
             scans: components["schemas"]["AppDir"];
             /** Shuffle */
             shuffle?: boolean | number | null;
+            /** Store Input */
+            store_input?: boolean | null;
+            /** Store Scan Events */
+            store_scan_events?: boolean | null;
             /** Tags */
             tags?: string[] | null;
             transcripts?: components["schemas"]["AppDir"] | null;
@@ -2509,6 +2513,10 @@ export interface components {
             scans?: string | null;
             /** Shuffle */
             shuffle?: boolean | number | null;
+            /** Store Input */
+            store_input?: boolean | null;
+            /** Store Scan Events */
+            store_scan_events?: boolean | null;
             /** Tags */
             tags?: string[] | null;
             /** Transcripts */
@@ -2567,6 +2575,10 @@ export interface components {
             scans?: string | null;
             /** Shuffle */
             shuffle?: boolean | number | null;
+            /** Store Input */
+            store_input?: boolean | null;
+            /** Store Scan Events */
+            store_scan_events?: boolean | null;
             /** Tags */
             tags?: string[] | null;
             /** Transcripts */
@@ -2864,6 +2876,10 @@ export interface components {
             scans?: string | null;
             /** Shuffle */
             shuffle?: boolean | number | null;
+            /** Store Input */
+            store_input?: boolean | null;
+            /** Store Scan Events */
+            store_scan_events?: boolean | null;
             /** Tags */
             tags?: string[] | null;
             /** Transcripts */
@@ -2949,6 +2965,16 @@ export interface components {
             max_transcripts: number;
             /** Shuffle */
             shuffle?: boolean | number | null;
+            /**
+             * Store Input
+             * @default true
+             */
+            store_input: boolean;
+            /**
+             * Store Scan Events
+             * @default true
+             */
+            store_scan_events: boolean;
         };
         /**
          * ScanRevision
