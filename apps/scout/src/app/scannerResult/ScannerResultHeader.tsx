@@ -143,7 +143,7 @@ const headingsForResult = (
   resultData?: ScanResultData,
   status?: Status
 ): HeadingValue[] | undefined => {
-  if (!inputData) return [];
+  if (!inputData) return transcriptHeadings(appConfig, resultData, status);
   if (isTranscriptInput(inputData))
     return transcriptHeadings(appConfig, resultData, status);
   if (isMessageInput(inputData))

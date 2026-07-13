@@ -144,38 +144,52 @@ export function isObjectValue(
   return result.valueType === "object";
 }
 
+/**
+ * Wire-shaped variant of `ScannerInput` whose `input` can be `null` — the
+ * shape returned when a scan ran with `store_input` disabled (see Task 8's
+ * `ScanResultPayload`). Guards accept this so they narrow correctly whether
+ * or not the null case has already been normalized away.
+ */
+export type NullableScannerInput = Omit<ScannerInput, "input"> & {
+  input: ScannerInput["input"] | null;
+};
+
 // Type guard functions for DataFrameInput
 export function isTranscriptInput(
-  input: ScannerInput
+  input: NullableScannerInput
 ): input is ScannerInput & {
   input_type: "transcript";
   input: Transcript;
 } {
-  return input.input_type === "transcript";
+  return input.input_type === "transcript" && input.input != null;
 }
 
-export function isMessageInput(input: ScannerInput): input is ScannerInput & {
+export function isMessageInput(
+  input: NullableScannerInput
+): input is ScannerInput & {
   input_type: "message";
   input: ChatMessage;
 } {
-  return input.input_type === "message";
+  return input.input_type === "message" && input.input != null;
 }
 
-export function isMessagesInput(input: ScannerInput): input is ScannerInput & {
+export function isMessagesInput(
+  input: NullableScannerInput
+): input is ScannerInput & {
   input_type: "messages";
   input: ChatMessage[];
 } {
-  return input.input_type === "messages";
+  return input.input_type === "messages" && input.input != null;
 }
 
 export function isEventInput(
-  input: ScannerInput
+  input: NullableScannerInput
 ): input is ScannerInput & { input_type: "event"; input: EventType } {
-  return input.input_type === "event";
+  return input.input_type === "event" && input.input != null;
 }
 
 export function isEventsInput(
-  input: ScannerInput
+  input: NullableScannerInput
 ): input is ScannerInput & { input_type: "events"; input: Event[] } {
-  return input.input_type === "events";
+  return input.input_type === "events" && input.input != null;
 }
