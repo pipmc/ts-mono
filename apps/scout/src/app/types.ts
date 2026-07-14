@@ -146,9 +146,10 @@ export function isObjectValue(
 
 /**
  * Wire-shaped variant of `ScannerInput` whose `input` can be `null` — the
- * shape returned when a scan ran with `store_input` disabled (see Task 8's
- * `ScanResultPayload`). Guards accept this so they narrow correctly whether
- * or not the null case has already been normalized away.
+ * shape returned when a scan ran with `store_input` disabled (see
+ * `ScanResultPayload` in `src/api/scanResultDetail.ts`). Guards accept this
+ * so they narrow correctly whether or not the null case has already been
+ * normalized away.
  */
 export type NullableScannerInput = Omit<ScannerInput, "input"> & {
   input: ScannerInput["input"] | null;

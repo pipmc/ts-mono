@@ -384,7 +384,7 @@ export const ScannerResultPanel: FC = () => {
           }}
           className={styles.fullHeight}
         >
-          {resultData && (
+          {resultData && !detailLoading && (
             <ResultPanel resultData={resultData} inputData={inputData} />
           )}
         </TabPanel>
